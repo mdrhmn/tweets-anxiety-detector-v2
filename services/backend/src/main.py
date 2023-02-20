@@ -164,7 +164,7 @@ def utils_tweets_predict(text, model_path, vect_path):
     "/predict-lime/",
     status_code=200,
     # response_class=FileResponse
-    # response_class=HTMLResponse
+    response_class=HTMLResponse
 )
 def get_text_emotion_prediction(tweet: Tweet):
     explainer = lime_text.LimeTextExplainer(class_names=["Happy", "Worry"])
