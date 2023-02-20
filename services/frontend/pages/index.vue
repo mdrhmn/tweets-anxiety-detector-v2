@@ -367,12 +367,13 @@ const fastAPI = (e) => {
             "Processing";
         document.querySelector("#button-spinner").style.display = "inline";
         fetch(config.public.apiURL, {
+            credentials: 'include',
             method: "POST",
             body: JSON.stringify({ text: prompt.value }),
             headers: {
                 "Content-Type": "application/json",
                 // "Access-Control-Allow-Headers": "Content-Type",
-                "Access-Control-Allow-Origin": config.public.apiURL,
+                "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Methods": "POST, GET, DELETE, OPTIONS",
             },
         })
