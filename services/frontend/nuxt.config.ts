@@ -1,3 +1,5 @@
+import config from "./config";
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     imports: {
@@ -14,6 +16,10 @@ export default defineNuxtConfig({
 
     app: {
         head: {
+            title: `Tweets Anxiety Predictor`,
+            htmlAttrs: {
+                lang: "en",
+            },
             meta: [
                 {
                     name: "viewport",
@@ -21,6 +27,89 @@ export default defineNuxtConfig({
                 },
                 {
                     charset: "utf-8",
+                },
+                {
+                    hid: "description",
+                    name: "description",
+                    content:
+                        "A single-page application (SPA) developed using Nuxt 3 and FastAPI for predicting the anxiety probability of a given tweet (or any text prompt limited to max. 280 characters).",
+                },
+                {
+                    hid: "title",
+                    name: "title",
+                    content: `Tweets Anxiety Predictor`,
+                },
+                {
+                    // hid: 'author',
+                    name: "author",
+                    content: config.name,
+                },
+                {
+                    // hid: "og:type",
+                    property: "og:type",
+                    content: "website",
+                },
+                {
+                    hid: "og:url",
+                    property: "og:url",
+                    content: `https://${config.domain}`,
+                },
+                {
+                    hid: "og:title",
+                    property: "og:title",
+                    content: `${config.name} | friendly neighbourhood developer`,
+                },
+                {
+                    hid: "og:description",
+                    property: "og:description",
+                    content:
+                        "A single-page application (SPA) developed using Nuxt 3 and FastAPI for predicting the anxiety probability of a given tweet (or any text prompt limited to max. 280 characters).",
+                },
+                {
+                    hid: "og:image",
+                    property: "og:image",
+                    content: `https://${config.domain}/`,
+                },
+                // {
+                // 	hid: "twitter:card",
+                // 	property: 'twitter:card',
+                // 	content: `${config.image}`
+                // },
+                {
+                    hid: "twitter:image",
+                    property: "twitter:image",
+                    content: `https://${config.domain}/`,
+                },
+                {
+                    hid: "twitter:card",
+                    name: "twitter:card",
+                    content: "summary_large_image",
+                },
+                {
+                    hid: "twitter:site",
+                    name: "twitter:site",
+                    content: "@" + config.social.twitter,
+                },
+                {
+                    hid: "twitter:creator",
+                    name: "twitter:creator",
+                    content: "@" + config.social.twitter,
+                },
+                {
+                    hid: "twitter:url",
+                    property: "twitter:url",
+                    content: `https://${config.domain}`,
+                },
+                {
+                    hid: "twitter:title",
+                    property: "twitter:title",
+                    content: "Tweets Anxiety Predictor",
+                },
+                {
+                    hid: "twitter:description",
+                    property: "twitter:description",
+                    content:
+                        "A single-page application (SPA) developed using Nuxt 3 and FastAPI for predicting the anxiety probability of a given tweet (or any text prompt limited to max. 280 characters).",
                 },
             ],
             link: [],
