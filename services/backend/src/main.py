@@ -13,6 +13,7 @@ import pickle
 # LIME
 from lime import lime_text
 
+from mangum import Mangum
 
 # Ignore warnings
 import warnings
@@ -20,6 +21,7 @@ import warnings
 warnings.filterwarnings("ignore")
 
 app = FastAPI()
+handler = Mangum(app)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
@@ -142,6 +144,7 @@ def get_text_emotion_prediction(tweet: Tweet):
 
     explained_output = explained.as_html()
     return HTMLResponse(content=explained_output, status_code=200)
+
 
 @app.get("/")
 async def root():
