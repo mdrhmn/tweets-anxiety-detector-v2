@@ -2,14 +2,12 @@ import config from "./config";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-    // runtimeConfig: {
-    //     public: {
-    //         locale: {
-    //             defaultLocale: process.env.NUXT_I18N_LOCALE,
-    //             fallbackLocale: process.env.NUXT_I18N_FALLBACK_LOCALE,
-    //         },
-    //     },
-    // },
+    runtimeConfig: {
+        public: {
+            apiURL:
+                process.env.API_URL || "http://127.0.0.1:8000/predict-lime/",
+        },
+    },
 
     imports: {
         dirs: [
@@ -137,9 +135,9 @@ export default defineNuxtConfig({
         },
     },
 
-    vite: {
-        define: {
-            API_URL: JSON.stringify(process.env.API_URL),
-        },
-    },
+    // vite: {
+    //     define: {
+    //         API_URL: JSON.stringify(process.env.API_URL),
+    //     },
+    // },
 });

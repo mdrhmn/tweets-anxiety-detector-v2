@@ -321,6 +321,8 @@ const prompt = ref("");
 const error = ref("");
 const LIMEOutput = ref("");
 
+const config = useRuntimeConfig();
+
 // Executing <script> elements inserted with .innerHTML
 // Reference: https://stackoverflow.com/questions/2592092/executing-script-elements-inserted-with-innerhtml
 const injectLIMEOutput = (elm, html) => {
@@ -352,9 +354,8 @@ const fastAPI = (e) => {
     if (prompt.value === "") {
         error.value = "Prompt is required!";
     } else {
-        let endpoint = API_URL;
-
-        fetch(endpoint, {
+        console.log(config.public.apiURL);
+        fetch(config.public.apiURL, {
             method: "POST",
             body: JSON.stringify({ text: prompt.value }),
             headers: {
