@@ -1,8 +1,11 @@
 # FastAPI
-from fastapi import FastAPI
+from fastapi import FastAPI, Request, Response
 from pydantic import BaseModel
-from fastapi.middleware.cors import CORSMiddleware  # NEW
+# from fastapi.middleware.cors import CORSMiddleware  # NEW
 from fastapi.responses import FileResponse, HTMLResponse
+
+from starlette.middleware import Middleware
+from starlette.middleware.cors import CORSMiddleware
 
 # Data cleaning
 from src.data_cleaning import cleaning_pipeline
@@ -18,10 +21,23 @@ from lime import lime_text
 # Ignore warnings
 import warnings
 
+
+ALLOWED_ORIGINS = [
+    "http://localhost:3000", "http://127.0.0.1:3000",
+    "https://tweets-anxiety-predictor.vercel.app/"
+]
+
+
 warnings.filterwarnings("ignore")
 
-app = FastAPI()
+middleware = [
+    Middleware(CORSMiddleware, allow_origins=ALLOWED_ORIGINS)
+]
+
+
+app = FastAPI(middleware=middleware)
 # handler = Mangum(app)
+
 # app.add_middleware(
 #     CORSMiddleware,
 #     allow_origins=["http://localhost:3000", "http://127.0.0.1:3000",
@@ -31,28 +47,34 @@ app = FastAPI()
 #     allow_headers=["*"],
 # )
 
-origins = [
-    "http://localhost:3000", "http://127.0.0.1:3000",
-    "https://tweets-anxiety-predictor.vercel.app/"
-]
+
+# handle CORS preflight requests
+@app.options('/{rest_of_path:path}')
+async def preflight_handler(request: Request, rest_of_path: str) -> Response:
+    response = Response()
+    response.headers['Access-Control-Allow-Origin'] = ALLOWED_ORIGINS
+    response.headers['Access-Control-Allow-Methods'] = 'POST, GET, DELETE, OPTIONS'
+    response.headers['Access-Control-Allow-Headers'] = 'Authorization, Content-Type'
+    return response
+
+# set CORS headers
 
 
 @app.middleware("http")
-async def add_cors_headers(request, call_next):
+async def add_CORS_header(request: Request, call_next):
     response = await call_next(request)
-    response.headers["Access-Control-Allow-Origin"] = origins
-    response.headers["Access-Control-Allow-Credentials"] = "true"
-    response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS"
-    response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
+    response.headers['Access-Control-Allow-Origin'] = ALLOWED_ORIGINS
+    response.headers['Access-Control-Allow-Methods'] = 'POST, GET, DELETE, OPTIONS'
+    response.headers['Access-Control-Allow-Headers'] = 'Authorization, Content-Type'
     return response
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=origins,
+#     allow_credentials=True,
+#     allow_methods=["*"],
+#     allow_headers=["*"],
+# )
 
 
 class Tweet(BaseModel):
