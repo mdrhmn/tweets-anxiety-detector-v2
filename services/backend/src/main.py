@@ -48,25 +48,25 @@ app = FastAPI(middleware=middleware)
 # )
 
 
-# handle CORS preflight requests
-@app.options('/{rest_of_path:path}')
-async def preflight_handler(request: Request, rest_of_path: str) -> Response:
-    response = Response()
-    response.headers['Access-Control-Allow-Origin'] = "*"
-    response.headers['Access-Control-Allow-Methods'] = 'POST, GET, DELETE, OPTIONS'
-    response.headers['Access-Control-Allow-Headers'] = 'Authorization, Content-Type'
-    return response
+# # handle CORS preflight requests
+# @app.options('/{rest_of_path:path}')
+# async def preflight_handler(request: Request, rest_of_path: str) -> Response:
+#     response = Response()
+#     response.headers['Access-Control-Allow-Origin'] = "*"
+#     response.headers['Access-Control-Allow-Methods'] = 'POST, GET, DELETE, OPTIONS'
+#     response.headers['Access-Control-Allow-Headers'] = 'Authorization, Content-Type'
+#     return response
 
-# set CORS headers
+# # set CORS headers
 
 
-@app.middleware("http")
-async def add_CORS_header(request: Request, call_next):
-    response = await call_next(request)
-    response.headers['Access-Control-Allow-Origin'] = "*"
-    response.headers['Access-Control-Allow-Methods'] = 'POST, GET, DELETE, OPTIONS'
-    response.headers['Access-Control-Allow-Headers'] = 'Authorization, Content-Type'
-    return response
+# @app.middleware("http")
+# async def add_CORS_header(request: Request, call_next):
+#     response = await call_next(request)
+#     response.headers['Access-Control-Allow-Origin'] = "*"
+#     response.headers['Access-Control-Allow-Methods'] = 'POST, GET, DELETE, OPTIONS'
+#     response.headers['Access-Control-Allow-Headers'] = 'Authorization, Content-Type'
+#     return response
 
 # app.add_middleware(
 #     CORSMiddleware,
