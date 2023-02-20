@@ -369,6 +369,7 @@ const fastAPI = (e) => {
             body: JSON.stringify({ text: prompt.value }),
             headers: {
                 "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*",
             },
         })
             .then(function (response) {
