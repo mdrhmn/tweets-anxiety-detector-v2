@@ -352,7 +352,14 @@ const fastAPI = (e) => {
     if (prompt.value === "") {
         error.value = "Prompt is required!";
     } else {
-        fetch("http://127.0.0.1:8000/predict-lime/", {
+        let endpoint;
+
+        if (process.env.NODE_ENV == "development")
+            endpoint =
+                "http://tweets-anxiety-predictor.herokuapp.com/predict-lime/";
+        else endpoint = "http://127.0.0.1:3000/predict-lime";
+
+        fetch(endpoint, {
             method: "POST",
             body: JSON.stringify({ text: prompt.value }),
             headers: {
