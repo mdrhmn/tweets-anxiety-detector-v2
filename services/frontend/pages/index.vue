@@ -166,7 +166,9 @@
                                             fill="currentColor"
                                         />
                                     </svg>
-                                    Submit
+                                    <span id="text-emotion-prediction-btn-label"
+                                        >Submit</span
+                                    >
                                 </button>
                             </div>
                         </div>
@@ -361,7 +363,9 @@ const fastAPI = (e) => {
         error.value = "Prompt is required!";
     } else {
         // console.log(config.public.apiURL);
-
+        document.querySelector("#text-emotion-prediction-btn-label").innerHTML =
+            "Processing";
+        document.querySelector("#button-spinner").style.display = "inline";
         fetch(config.public.apiURL, {
             method: "POST",
             // mode: "*cors", // no-cors, *cors, same-origin
@@ -382,6 +386,11 @@ const fastAPI = (e) => {
                     document.querySelector("#lime-explanation"),
                     data
                 );
+                document.querySelector("#button-spinner").style.display =
+                    "none";
+                document.querySelector(
+                    "#text-emotion-prediction-btn-label"
+                ).innerHTML = "Submit";
             })
             .catch((error) => {
                 console.error(error);
