@@ -1,11 +1,11 @@
 # FastAPI
 from fastapi import FastAPI, Request, Response
 from pydantic import BaseModel
-# from fastapi.middleware.cors import CORSMiddleware  # NEW
+from fastapi.middleware.cors import CORSMiddleware  # NEW
 from fastapi.responses import FileResponse, HTMLResponse
 
-from starlette.middleware import Middleware
-from starlette.middleware.cors import CORSMiddleware
+# from starlette.middleware import Middleware
+# from starlette.middleware.cors import CORSMiddleware
 
 # Data cleaning
 from src.data_cleaning import cleaning_pipeline
@@ -27,26 +27,14 @@ ALLOWED_ORIGINS = [
     "https://tweets-anxiety-predictor.vercel.app/"
 ]
 
-
 warnings.filterwarnings("ignore")
 
-middleware = [
-    Middleware(CORSMiddleware, allow_origins=ALLOWED_ORIGINS)
-]
-
-
-app = FastAPI(middleware=middleware)
+# middleware = [
+#     Middleware(CORSMiddleware, allow_origins=ALLOWED_ORIGINS)
+# ]
+# app = FastAPI(middleware=middleware)
+app = FastAPI()
 # handler = Mangum(app)
-
-# app.add_middleware(
-#     CORSMiddleware,
-#     allow_origins=["http://localhost:3000", "http://127.0.0.1:3000",
-#                    "https://tweets-anxiety-predictor.vercel.app/"],
-#     allow_credentials=True,
-#     allow_methods=["*"],
-#     allow_headers=["*"],
-# )
-
 
 # # handle CORS preflight requests
 # @app.options('/{rest_of_path:path}')
@@ -58,8 +46,6 @@ app = FastAPI(middleware=middleware)
 #     return response
 
 # # set CORS headers
-
-
 # @app.middleware("http")
 # async def add_CORS_header(request: Request, call_next):
 #     response = await call_next(request)
@@ -68,13 +54,13 @@ app = FastAPI(middleware=middleware)
 #     response.headers['Access-Control-Allow-Headers'] = 'Authorization, Content-Type'
 #     return response
 
-# app.add_middleware(
-#     CORSMiddleware,
-#     allow_origins=origins,
-#     allow_credentials=True,
-#     allow_methods=["*"],
-#     allow_headers=["*"],
-# )
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=ALLOWED_ORIGINS,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 class Tweet(BaseModel):
