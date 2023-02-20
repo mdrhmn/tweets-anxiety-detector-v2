@@ -364,14 +364,14 @@ const fastAPI = (e) => {
 
         fetch(config.public.apiURL, {
             method: "POST",
-            // mode: "cors", // no-cors, *cors, same-origin
+            // mode: "*cors", // no-cors, *cors, same-origin
             // credentials: "same-origin", // include, *same-origin, omit
             body: JSON.stringify({ text: prompt.value }),
             headers: {
                 "Content-Type": "application/json",
-                "Access-Control-Allow-Headers": "Content-Type",
+                // "Access-Control-Allow-Headers": "Content-Type",
                 "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+                "Access-Control-Allow-Methods": "POST",
             },
         })
             .then(function (response) {
