@@ -13,7 +13,7 @@ import pickle
 # LIME
 from lime import lime_text
 
-from mangum import Mangum
+# from mangum import Mangum
 
 # Ignore warnings
 import warnings
@@ -21,11 +21,10 @@ import warnings
 warnings.filterwarnings("ignore")
 
 app = FastAPI()
-handler = Mangum(app)
+# handler = Mangum(app)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000",
-                   "https://tweets-anxiety-predictor.vercel.app/"],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -132,7 +131,7 @@ def utils_tweets_predict(text, model_path, vect_path):
     "/predict-lime/",
     status_code=200,
     # response_class=FileResponse
-    response_class=HTMLResponse
+    # response_class=HTMLResponse
 )
 def get_text_emotion_prediction(tweet: Tweet):
     explainer = lime_text.LimeTextExplainer(class_names=["Happy", "Worry"])
