@@ -52,7 +52,7 @@ app = FastAPI(middleware=middleware)
 @app.options('/{rest_of_path:path}')
 async def preflight_handler(request: Request, rest_of_path: str) -> Response:
     response = Response()
-    response.headers['Access-Control-Allow-Origin'] = "http://localhost:3000http://127.0.0.1:3000, https://tweets-anxiety-predictor.vercel.app/"
+    response.headers['Access-Control-Allow-Origin'] = "http://localhost:3000, http://127.0.0.1:3000, https://tweets-anxiety-predictor.vercel.app/"
     response.headers['Access-Control-Allow-Methods'] = 'POST, GET, DELETE, OPTIONS'
     response.headers['Access-Control-Allow-Headers'] = 'Authorization, Content-Type'
     return response
@@ -63,7 +63,7 @@ async def preflight_handler(request: Request, rest_of_path: str) -> Response:
 @app.middleware("http")
 async def add_CORS_header(request: Request, call_next):
     response = await call_next(request)
-    response.headers['Access-Control-Allow-Origin'] = "http://localhost:3000http://127.0.0.1:3000, https://tweets-anxiety-predictor.vercel.app/"
+    response.headers['Access-Control-Allow-Origin'] = "http://localhost:3000, http://127.0.0.1:3000, https://tweets-anxiety-predictor.vercel.app/"
     response.headers['Access-Control-Allow-Methods'] = 'POST, GET, DELETE, OPTIONS'
     response.headers['Access-Control-Allow-Headers'] = 'Authorization, Content-Type'
     return response
