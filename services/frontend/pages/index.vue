@@ -314,7 +314,7 @@
             >
                 <span class="text-sm text-gray-600 dark:text-gray-200"
                     >{{ new Date().getFullYear() }} © Fitweet — Muhd Rahiman,
-                    Faidz Hazirah.<br />Made using Tailwind, Django &
+                    Faidz Hazirah.<br />Made using Tailwind, Nuxt 3, FastAPI &
                     Flowbite.</span
                 >
             </div>
@@ -360,10 +360,12 @@ const fastAPI = (e) => {
     if (prompt.value === "") {
         error.value = "Prompt is required!";
     } else {
-        console.log(config.public.apiURL);
+        // console.log(config.public.apiURL);
+
         fetch(config.public.apiURL, {
             method: "POST",
-            mode: 'no-cors', 
+            // mode: "cors", // no-cors, *cors, same-origin
+            // credentials: "same-origin", // include, *same-origin, omit
             body: JSON.stringify({ text: prompt.value }),
             headers: {
                 "Content-Type": "application/json",
@@ -378,7 +380,9 @@ const fastAPI = (e) => {
                     data
                 );
             })
-            .catch();
+            .catch((error) => {
+                console.error(error);
+            });
     }
 };
 </script>
