@@ -66,7 +66,7 @@ export default defineNuxtConfig({
                 {
                     hid: "og:title",
                     property: "og:title",
-                    content: `${config.name} | friendly neighbourhood developer`,
+                    content: `Tweets Anxiety Predictor`,
                 },
                 {
                     hid: "og:description",
