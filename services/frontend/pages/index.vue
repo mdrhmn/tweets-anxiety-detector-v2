@@ -363,6 +363,7 @@ const fastAPI = (e) => {
         console.log(config.public.apiURL);
         fetch(config.public.apiURL, {
             method: "POST",
+            mode: 'no-cors', 
             body: JSON.stringify({ text: prompt.value }),
             headers: {
                 "Content-Type": "application/json",
