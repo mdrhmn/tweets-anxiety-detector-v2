@@ -1,4 +1,10 @@
 <template>
+    <Head>
+        <Meta
+            http-equiv="Content-Security-Policy"
+            content="upgrade-insecure-requests"
+        />
+    </Head>
     <div
         class="bg-color dark:bg-gray-400 flex items-center h-auto justify-center"
     >
