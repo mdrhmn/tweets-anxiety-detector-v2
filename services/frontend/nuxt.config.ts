@@ -2,6 +2,15 @@ import config from "./config";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+    // runtimeConfig: {
+    //     public: {
+    //         locale: {
+    //             defaultLocale: process.env.NUXT_I18N_LOCALE,
+    //             fallbackLocale: process.env.NUXT_I18N_FALLBACK_LOCALE,
+    //         },
+    //     },
+    // },
+
     imports: {
         dirs: [
             "stores",
@@ -125,6 +134,12 @@ export default defineNuxtConfig({
         plugins: {
             tailwindcss: {},
             autoprefixer: {},
+        },
+    },
+
+    vite: {
+        define: {
+            API_URL: JSON.stringify(process.env.API_URL),
         },
     },
 });
