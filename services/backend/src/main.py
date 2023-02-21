@@ -176,12 +176,12 @@ def utils_tweets_predict(text, model_path, vect_path):
     # response_class=FileResponse
     # response_class=HTMLResponse
 )
-@app.options(
-    "/predict-lime/",
-    status_code=201,
-    # response_class=FileResponse
-    # response_class=HTMLResponse
-)
+# @app.options(
+#     "/predict-lime/",
+#     status_code=201,
+#     # response_class=FileResponse
+#     # response_class=HTMLResponse
+# )
 def get_text_emotion_prediction(tweet: Tweet, request: Request):
     if (request.method == "OPTIONS"):
         new_header = MutableHeaders(request._headers)
