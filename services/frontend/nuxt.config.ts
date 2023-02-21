@@ -5,9 +5,12 @@ export default defineNuxtConfig({
     runtimeConfig: {
         public: {
             apiURL:
-                process.env.API_URL || "http://tweets-anxiety-predictor.herokuapp.com/predict-lime/",
+                process.env.API_URL ||
+                "http://tweets-anxiety-predictor.herokuapp.com/predict-lime/",
         },
     },
+
+    modules: ["@nuxt/image-edge"],
 
     imports: {
         dirs: [

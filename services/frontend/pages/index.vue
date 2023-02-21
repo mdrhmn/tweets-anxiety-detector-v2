@@ -276,7 +276,9 @@
                     <div
                         class="flex justify-center w-full lg:max-w-xl mt-10 p-5 rounded-lg border border-gray-200 shadow-md dark:bg-white dark:border-gray-700"
                     >
-                        <img
+                        <nuxt-img
+                            format="webp"
+                            loading="lazy"
                             class="rounded-md"
                             src="https://www.oreilly.com/content/wp-content/uploads/sites/2/2019/06/figure1-a9533a3fb9bb9ace6ee96b4cdc9b6bcb.jpg"
                             alt="LIME visualisation"
