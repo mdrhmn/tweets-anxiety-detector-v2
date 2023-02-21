@@ -1,10 +1,11 @@
 # FastAPI
-from fastapi import FastAPI, Request, Response, status
+from fastapi import FastAPI, Request, Response, status, HTTPException
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware  # NEW
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
 from fastapi.exceptions import RequestValidationError
 from fastapi.encoders import jsonable_encoder
+from starlette.datastructures import MutableHeaders
 # from starlette.middleware import Middleware
 # from starlette.middleware.cors import CORSMiddleware
 
@@ -171,12 +172,24 @@ def utils_tweets_predict(text, model_path, vect_path):
 # @app.exception_handler(RequestValidationError)
 @app.post(
     "/predict-lime/",
-    status_code=200,
+    # status_code=200,
     # response_class=FileResponse
-    response_class=HTMLResponse
+    # response_class=HTMLResponse
 )
-def get_text_emotion_prediction(tweet: Tweet):
-    # print(request.headers)
+@app.options(
+    "/predict-lime/",
+    status_code=201,
+    # response_class=FileResponse
+    # response_class=HTMLResponse
+)
+def get_text_emotion_prediction(tweet: Tweet, request: Request):
+    if (request.method == "OPTIONS"):
+        new_header = MutableHeaders(request._headers)
+        new_header["Access-Control-Allow-Origin"] = "*"
+        new_header["Access-Control-Allow-Methods"] = "POST, GET, DELETE, OPTIONS"
+        return
+
+    # print(request.method)
     # print(request.client)
     explainer = lime_text.LimeTextExplainer(class_names=["Happy", "Worry"])
     explained = explainer.explain_instance(
@@ -187,15 +200,15 @@ def get_text_emotion_prediction(tweet: Tweet):
     )
 
     explained_output = explained.as_html()
-    return HTMLResponse(content=explained_output, status_code=200)
+    return HTMLResponse(content=explained_output, status_code=201)
 
 
-@app.get("/")
+@ app.get("/")
 async def root():
     return {"message": "Hello World"}
 
 
-@app.post("/predict/", status_code=200)
+@ app.post("/predict/", status_code=200)
 async def predict_emotion(tweet: Tweet) -> list[TweetPrediction]:
     (
         predicted_emotion_class,
