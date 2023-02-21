@@ -374,7 +374,7 @@ const fastAPI = (e) => {
             // credentials: "same-origin", // include, *same-origin, omit
             body: JSON.stringify({ text: prompt.value }),
             headers: {
-                // Origin: config.public.apiURL,
+                Origin: "https://tweets-anxiety-predictor.vercel.app/",
                 "Content-Type": "application/json",
                 // "Access-Control-Allow-Headers": "Content-Type",
                 "Access-Control-Allow-Origin": "*",
