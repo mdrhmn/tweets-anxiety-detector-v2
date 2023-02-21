@@ -278,7 +278,6 @@
                     >
                         <nuxt-img
                             format="webp"
-                            loading="lazy"
                             class="rounded-md"
                             src="https://www.oreilly.com/content/wp-content/uploads/sites/2/2019/06/figure1-a9533a3fb9bb9ace6ee96b4cdc9b6bcb.jpg"
                             alt="LIME visualisation"
@@ -364,7 +363,6 @@ const fastAPI = (e) => {
     if (prompt.value === "") {
         error.value = "Prompt is required!";
     } else {
-        // console.log(config.public.apiURL);
         document.querySelector("#text-emotion-prediction-btn-label").innerHTML =
             "Processing";
         document.querySelector("#button-spinner").style.display = "inline";
@@ -378,7 +376,7 @@ const fastAPI = (e) => {
             headers: {
                 Origin: "https://tweets-anxiety-predictor.vercel.app/",
                 "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": config.public.apiURL,
+                "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Methods": "POST, GET, DELETE, OPTIONS",
                 "Access-Control-Allow-Headers":
                     "Origin, X-Requested-With, Content-Type, Accept, Authorization",
@@ -400,6 +398,11 @@ const fastAPI = (e) => {
                 ).innerHTML = "Submit";
             })
             .catch((error) => {
+                document.querySelector("#button-spinner").style.display =
+                    "none";
+                document.querySelector(
+                    "#text-emotion-prediction-btn-label"
+                ).innerHTML = "Submit";
                 console.error(error);
             });
     }
