@@ -1,9 +1,10 @@
 # FastAPI
-from fastapi import FastAPI, Request, Response
+from fastapi import FastAPI, Request, Response, status
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware  # NEW
-from fastapi.responses import FileResponse, HTMLResponse
-
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
+from fastapi.exceptions import RequestValidationError
+from fastapi.encoders import jsonable_encoder
 # from starlette.middleware import Middleware
 # from starlette.middleware.cors import CORSMiddleware
 
@@ -24,7 +25,8 @@ import warnings
 
 ALLOWED_ORIGINS = [
     "http://localhost:3000", "http://127.0.0.1:3000",
-    "https://tweets-anxiety-predictor.vercel.app/"
+    "https://tweets-anxiety-predictor.vercel.app/",
+    "http://tweets-anxiety-predictor.vercel.app/",
 ]
 
 warnings.filterwarnings("ignore")
@@ -56,11 +58,11 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=ALLOWED_ORIGINS,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
-    expose_headers=["*"]
+    # expose_headers=["*"],
 )
 
 
@@ -78,11 +80,17 @@ class LIMEPrediction(BaseModel):
     output: str
 
 
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    return JSONResponse(
+        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+        content=jsonable_encoder({"detail": exc.errors(), "body": exc.body}),
+    )
+
+
 def utils_text_emotion_prediction(text):
     model = pickle.load(open("models/LR_TFIDF_Model.pkl", "rb"))
-
     vectorizer = pickle.load(open("models/TFIDF_Vectorizer.pkl", "rb"))
-
     text_transformed = vectorizer.transform(text)
 
     return model.predict_proba(text_transformed)
@@ -160,6 +168,7 @@ def utils_tweets_predict(text, model_path, vect_path):
             return "Worry", predict_proba, cleaned_tweet
 
 
+# @app.exception_handler(RequestValidationError)
 @app.post(
     "/predict-lime/",
     status_code=200,
@@ -167,6 +176,8 @@ def utils_tweets_predict(text, model_path, vect_path):
     response_class=HTMLResponse
 )
 def get_text_emotion_prediction(tweet: Tweet):
+    # print(request.headers)
+    # print(request.client)
     explainer = lime_text.LimeTextExplainer(class_names=["Happy", "Worry"])
     explained = explainer.explain_instance(
         text_instance=tweet.text,
