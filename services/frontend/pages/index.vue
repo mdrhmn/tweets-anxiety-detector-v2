@@ -366,17 +366,20 @@ const fastAPI = (e) => {
         document.querySelector("#text-emotion-prediction-btn-label").innerHTML =
             "Processing";
         document.querySelector("#button-spinner").style.display = "inline";
+
         fetch(config.public.apiURL, {
-            credentials: 'include',
+            // credentials: "include",
             method: "POST",
             // mode: "no-cors", // no-cors, *cors, same-origin
             // credentials: "same-origin", // include, *same-origin, omit
             body: JSON.stringify({ text: prompt.value }),
             headers: {
+                // Origin: config.public.apiURL,
                 "Content-Type": "application/json",
                 // "Access-Control-Allow-Headers": "Content-Type",
                 "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Methods": "POST, GET, DELETE, OPTIONS",
+                // "Content-Security-Policy": "upgrade-insecure-requests",
             },
         })
             .then(function (response) {
