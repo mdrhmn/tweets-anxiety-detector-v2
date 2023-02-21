@@ -376,9 +376,10 @@ const fastAPI = (e) => {
             headers: {
                 Origin: "https://tweets-anxiety-predictor.vercel.app/",
                 "Content-Type": "application/json",
-                // "Access-Control-Allow-Headers": "Content-Type",
                 "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Methods": "POST, GET, DELETE, OPTIONS",
+                "Access-Control-Allow-Headers":
+                    "Origin, X-Requested-With, Content-Type, Accept, Authorization",
                 // "Content-Security-Policy": "upgrade-insecure-requests",
             },
         })
