@@ -341,8 +341,6 @@ const LIMEOutput = ref("");
 
 const config = useRuntimeConfig();
 
-const checkPromptChars = computed(() => {});
-
 // Executing <script> elements inserted with .innerHTML
 // Reference: https://stackoverflow.com/questions/2592092/executing-script-elements-inserted-with-innerhtml
 const injectLIMEOutput = (elm, html) => {
