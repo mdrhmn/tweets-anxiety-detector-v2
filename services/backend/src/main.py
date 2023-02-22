@@ -26,8 +26,10 @@ import warnings
 
 ALLOWED_ORIGINS = [
     "http://localhost:3000", "http://127.0.0.1:3000",
-    "https://tweets-anxiety-predictor.vercel.app/",
-    "http://tweets-anxiety-predictor.vercel.app/",
+    # "https://tweets-anxiety-predictor.vercel.app/",
+    # "http://tweets-anxiety-predictor.vercel.app/",
+    "https://tweets-anxiety-predictor.vercel.app",
+    "http://tweets-anxiety-predictor.vercel.app",
 ]
 
 warnings.filterwarnings("ignore")
@@ -183,14 +185,15 @@ def utils_tweets_predict(text, model_path, vect_path):
 #     # response_class=HTMLResponse
 # )
 def get_text_emotion_prediction(tweet: Tweet, request: Request):
-    if (request.method == "OPTIONS"):
-        new_header = MutableHeaders(request._headers)
-        new_header["Access-Control-Allow-Origin"] = "*"
-        new_header["Access-Control-Allow-Methods"] = "POST, GET, DELETE, OPTIONS"
-        return
+    # if (request.method == "OPTIONS"):
+    #     new_header = MutableHeaders(request._headers)
+    #     new_header["Access-Control-Allow-Origin"] = "*"
+    #     new_header["Access-Control-Allow-Methods"] = "POST, GET, DELETE, OPTIONS"
+    #     return
 
     # print(request.method)
     # print(request.client)
+    print(request.headers)
     explainer = lime_text.LimeTextExplainer(class_names=["Happy", "Worry"])
     explained = explainer.explain_instance(
         text_instance=tweet.text,
