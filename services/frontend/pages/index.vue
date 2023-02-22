@@ -294,6 +294,7 @@
           </div>
 
           <div
+            v-if="isProcessing"
             class="lg:max-w-xl p-4 my-5 text-sm dark:text-white rounded-md relative py-3 mb-10 w-full items-center justify-center bg-white border border-gray-100 shadow-md dark:bg-gray-500 dark:border-gray-800 dark:hover:bg-gray-400"
           >
             <h5
