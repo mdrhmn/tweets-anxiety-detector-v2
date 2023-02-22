@@ -35,8 +35,19 @@ import inflect
 import emoji
 import re
 
-nltk.download("stopwords")
-nltk.download("wordnet")
+try:
+    nltk.data.find('corpora/stopwords')
+except LookupError:
+    nltk.download('stopwords')
+
+try:
+    nltk.data.find('corpora/wordnet')
+except LookupError:
+    nltk.download('wordnet')
+
+
+# nltk.download("stopwords")
+# nltk.download("wordnet")
 
 
 def strip_html(text):
