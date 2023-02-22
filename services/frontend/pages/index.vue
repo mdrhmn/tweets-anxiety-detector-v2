@@ -13,57 +13,109 @@
         </h3>
       </div>
 
-      <div
-        v-if="error"
-        id="targetElement"
-        class="fixed top-10 right-5 flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800"
-        role="alert"
-      >
+      <Transition name="slide-fade">
         <div
-          class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg dark:bg-red-800 dark:text-red-200"
+          v-if="error"
+          id="toast-error"
+          class="fixed top-10 right-5 flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800"
+          role="alert"
         >
-          <svg
-            aria-hidden="true"
-            class="w-5 h-5"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
+          <div
+            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg dark:bg-red-800 dark:text-red-200"
           >
-            <path
-              fill-rule="evenodd"
-              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-              clip-rule="evenodd"
-            />
-          </svg>
-          <span class="sr-only">Error icon</span>
-        </div>
-        <div class="ml-3 text-sm font-normal">
-          {{ error }}
-        </div>
-        <button
-          id="triggerElement"
-          type="button"
-          class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
-          data-dismiss-target="#targetElement"
-          aria-label="Close"
-          @click="dismissToast"
+            <svg
+              aria-hidden="true"
+              class="w-5 h-5"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            <span class="sr-only">Error icon</span>
+          </div>
+          <div class="ml-3 text-sm font-normal">
+            {{ error }}
+          </div>
+          <button
+            type="button"
+            class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
+            data-dismiss-target="#toast-error"
+            aria-label="Close"
+            @click="dismissErrorToast"
+          >
+            <span class="sr-only">Close</span>
+            <svg
+              aria-hidden="true"
+              class="w-5 h-5"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </button></div
+      ></Transition>
+
+      <Transition name="slide-fade"
+        ><div
+          v-if="success"
+          id="toast-success"
+          class="fixed top-10 right-5 flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800"
+          role="alert"
         >
-          <span class="sr-only">Close</span>
-          <svg
-            aria-hidden="true"
-            class="w-5 h-5"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
+          <div
+            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200"
           >
-            <path
-              fill-rule="evenodd"
-              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-              clip-rule="evenodd"
-            />
-          </svg>
-        </button>
-      </div>
+            <svg
+              aria-hidden="true"
+              class="w-5 h-5"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+            <span class="sr-only">Check icon</span>
+          </div>
+          <div class="ml-3 text-sm font-normal">
+            Tweet anxiety prediction successful.
+          </div>
+          <button
+            type="button"
+            class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700"
+            data-dismiss-target="#toast-success"
+            aria-label="Close"
+            @click="dismissSuccessToast"
+          >
+            <span class="sr-only">Close</span>
+            <svg
+              aria-hidden="true"
+              class="w-5 h-5"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                clip-rule="evenodd"
+              ></path>
+            </svg>
+          </button></div
+      ></Transition>
 
       <div class="border-t border-gray-200 dark:border-none">
         <section class="dark:bg-gray-800">
@@ -72,16 +124,17 @@
               <h1
                 class="text-3xl font-bold text-gray-800 dark:text-white md:text-4xl text-center"
               >
-                Predict the anxiety<br>of your Tweet!
+                Predict the anxiety<br />of your Tweet!
               </h1>
 
               <p class="mt-6 text-gray-500 dark:text-gray-300 text-center">
                 Use our trained
                 <span
                   data-tooltip-target="tooltip-default"
-                  class="font-medium text-indigo-600 dark:text-indigo-400"
-                >Emotion Detection Model (EDM)</span>
-                to analyse the anxiety of your tweet.
+                  class="font-medium text-blue-600 dark:text-blue-400"
+                  >Emotion Detection Model (EDM)</span
+                >
+                to analyse the anxiety probabilities of your tweet.
               </p>
 
               <div
@@ -91,14 +144,11 @@
               >
                 Hyperparameter-tuned Logistic Regression trained with 4,700
                 Tweets.
-                <div
-                  class="tooltip-arrow"
-                  data-popper-arrow
-                />
+                <div class="tooltip-arrow" data-popper-arrow />
               </div>
 
               <div
-                class="flex p-4 my-5 mb-4 text-sm text-indigo-700 bg-indigo-100 rounded-lg dark:text-white dark:bg-indigo-600"
+                class="flex p-4 my-5 mb-4 text-sm text-blue-700 bg-blue-100 rounded-lg dark:text-white dark:bg-blue-600"
                 role="alert"
               >
                 <svg
@@ -133,21 +183,24 @@
                 <span
                   v-if="prompt.length == 0"
                   class="text-gray-500 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:text-white"
-                >{{ prompt.length }} / 280 characters</span>
+                  >{{ prompt.length }} / 280 characters</span
+                >
                 <span
                   v-else-if="prompt.length < 280"
                   class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300"
-                >{{ prompt.length }} / 280 characters</span>
+                  >{{ prompt.length }} / 280 characters</span
+                >
                 <span
                   v-else
                   class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300"
-                >{{ prompt.length }} / 280 characters</span>
+                  >{{ prompt.length }} / 280 characters</span
+                >
               </div>
 
               <div class="flex justify-center mt-6">
                 <button
                   id="text-emotion-prediction-btn"
-                  class="px-4 py-2 tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-600 rounded-md focus:ring focus:ring-indigo-300 focus:ring-opacity-80 fo sm:mx-2 hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500"
+                  class="px-4 py-2 tracking-wide text-white capitalize transition-colors duration-200 transform bg-blue-600 rounded-md focus:ring focus:ring-indigo-300 focus:ring-opacity-80 fo sm:mx-2 hover:bg-blue-500 focus:outline-none focus:bg-blue-500"
                   @click="fastAPI"
                 >
                   <svg
@@ -174,11 +227,13 @@
           </div>
         </section>
 
-        <hr class="border-gray-200 dark:border-gray-700">
+        <hr class="border-gray-200 dark:border-gray-700" />
 
-        <div class="flex flex-col items-center space-y-3 p-10 dark:bg-gray-800">
+        <div
+          class="flex flex-col items-center space-y-3 px-6 py-12 mx-auto dark:bg-gray-800"
+        >
           <span
-            class="inline-block p-3 text-indigo-500 bg-indigo-100 rounded-full dark:text-white dark:bg-indigo-600"
+            class="inline-block p-3 text-blue-500 bg-blue-100 rounded-full dark:text-white dark:bg-blue-600"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -206,7 +261,7 @@
           </p>
 
           <div
-            class="flex w-full lg:max-w-xl p-4 my-5 mb-4 text-sm text-indigo-700 bg-indigo-100 rounded-lg dark:text-white dark:bg-indigo-600"
+            class="flex w-full lg:max-w-xl p-4 my-5 mb-4 text-sm text-blue-700 bg-blue-100 rounded-lg dark:text-white dark:bg-blue-600"
             role="alert"
           >
             <svg
@@ -221,29 +276,69 @@
                 clip-rule="evenodd"
               />
             </svg>
+
             <div>
-              The emotion prediction will be analysed into 2 emotions -
-              <span class="font-medium">Happy</span> or
-              <span class="font-medium">Worry</span>.<br><br>The emotion
-              detected is/should considered as
+              The emotion prediction will be analysed into 2 emotions:
+              <span
+                class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300"
+                >Happy</span
+              >or
+              <span
+                class="bg-purple-100 text-purple-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-purple-900 dark:text-purple-300"
+                >Worry</span
+              ><br /><br />The emotion detected is/should considered as
               <span class="font-medium">No Emotion</span> if the probabilities
-              of Happy and Worry emotions are contentious (within 0.2%
-              difference).
+              of Happy and Worry emotions are contentious/with marginal (~2%)
+              difference.
             </div>
           </div>
+
+          <div
+            v-if="isProcessing"
+            class="lg:max-w-xl p-4 my-5 text-sm dark:text-white rounded-md relative py-3 mb-10 w-full items-center justify-center bg-white border border-gray-100 shadow-md dark:bg-gray-500 dark:border-gray-800 dark:hover:bg-gray-400"
+          >
+            <h5
+              class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white opacity-20"
+            >
+              Processing, please wait...
+            </h5>
+            <div
+              role="status"
+              class="absolute -translate-x-1/2 -translate-y-1/2 top-2/4 left-1/2"
+            >
+              <svg
+                aria-hidden="true"
+                class="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+                viewBox="0 0 100 101"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                  fill="currentFill"
+                />
+              </svg>
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+
           <div
             id="lime-explanation"
-            class="lg:max-w-xl p-4 my-5 text-sm dark:text-white rounded-md flex py-3 mb-10 w-full items-center justify-center overflow-x-scroll"
+            class="block lg:max-w-xl p-4 my-5 text-sm dark:text-white rounded-md py-3 mb-10 w-full items-center justify-center overflow-x-scroll"
           />
         </div>
 
-        <hr class="border-gray-200 dark:border-gray-700">
+        <hr class="border-gray-200 dark:border-gray-700" />
 
         <div
           class="flex flex-col items-center p-10 space-y-3 text-center dark:bg-gray-800"
         >
           <span
-            class="inline-block p-3 text-indigo-500 bg-indigo-100 rounded-full dark:text-white dark:bg-indigo-600"
+            class="inline-block p-3 text-blue-500 bg-blue-100 rounded-full dark:text-white dark:bg-blue-600"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -287,7 +382,7 @@
           <a
             href="https://homes.cs.washington.edu/~marcotcr/blog/lime/"
             target="_blank"
-            class="flex items-center -mx-1 text-sm text-indigo-500 capitalize transition-colors duration-200 transform dark:text-indigo-400 hover:underline hover:text-indigo-600 dark:hover:text-indigo-500"
+            class="flex items-center -mx-1 text-sm text-blue-500 capitalize transition-colors duration-200 transform dark:text-blue-400 hover:underline hover:text-blue-600 dark:hover:text-blue-500"
           >
             <span class="mx-1">read more</span>
             <svg
@@ -309,55 +404,70 @@
       <div
         class="flex items-center justify-center py-4 text-center bg-gray-50 border-gray-200 dark:border-none dark:bg-gray-700"
       >
-        <span class="text-sm text-gray-600 dark:text-gray-200">{{ new Date().getFullYear() }} © Fitweet — Muhd Rahiman.<br>Made
-          using Tailwind, Nuxt 3, FastAPI & Flowbite.</span>
+        <span class="text-sm text-gray-600 dark:text-gray-200"
+          >{{ new Date().getFullYear() }} © Fitweet — Muhd Rahiman.<br />Made
+          using Tailwind, Nuxt 3, FastAPI & Flowbite.</span
+        >
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-const prompt = ref("")
-const error = ref("")
-const LIMEOutput = ref("")
+const prompt = ref("");
+const error = ref("");
+const success = ref(false);
+const isProcessing = ref(false);
+const LIMEOutput = ref("");
 
-const config = useRuntimeConfig()
+const config = useRuntimeConfig();
 
 // Executing <script> elements inserted with .innerHTML
 // Reference: https://stackoverflow.com/questions/2592092/executing-script-elements-inserted-with-innerhtml
 const injectLIMEOutput = (elm, html) => {
-  LIMEOutput.value = html
-  elm.innerHTML = html
-  elm.style.backgroundColor = "white"
+  LIMEOutput.value = html;
+  elm.innerHTML = html;
+  elm.style.backgroundColor = "white";
 
   Array.from(elm.querySelectorAll("script")).forEach((oldScriptEl) => {
-    const newScriptEl = document.createElement("script")
+    const newScriptEl = document.createElement("script");
 
     Array.from(oldScriptEl.attributes).forEach((attr) => {
-      newScriptEl.setAttribute(attr.name, attr.value)
-    })
+      newScriptEl.setAttribute(attr.name, attr.value);
+    });
 
-    const scriptText = document.createTextNode(oldScriptEl.innerHTML)
-    newScriptEl.appendChild(scriptText)
+    const scriptText = document.createTextNode(oldScriptEl.innerHTML);
+    newScriptEl.appendChild(scriptText);
 
-    oldScriptEl.parentNode.replaceChild(newScriptEl, oldScriptEl)
-  })
-}
+    oldScriptEl.parentNode.replaceChild(newScriptEl, oldScriptEl);
+  });
+};
 
-const dismissToast = () => {
-  error.value = ""
-}
+const dismissErrorToast = () => {
+  if (error.value !== "") error.value = "";
+};
+
+const dismissSuccessToast = () => {
+  if (success.value !== true) success.value = false;
+};
 
 const fastAPI = (e) => {
-  e.preventDefault()
+  e.preventDefault();
 
   if (prompt.value === "") {
-    error.value = "Prompt is required!"
+    error.value = "Prompt is required!";
+    setTimeout(function () {
+      error.value = "";
+    }, 2000);
   } else {
+    error.value = false;
+    isProcessing.value = true;
+    document.querySelector("#lime-explanation").style.display = "none";
+
     document.querySelector("#text-emotion-prediction-btn-label").innerHTML =
-      "Processing"
-    document.querySelector("#button-spinner").style.display = "inline"
-    document.querySelector("#text-emotion-prediction-btn").disabled = true
+      "Processing";
+    document.querySelector("#button-spinner").style.display = "inline";
+    document.querySelector("#text-emotion-prediction-btn").disabled = true;
 
     fetch(config.public.apiURL, {
       // credentials: "include",
@@ -371,35 +481,71 @@ const fastAPI = (e) => {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "POST, GET, DELETE, OPTIONS",
         "Access-Control-Allow-Headers":
-          "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+          "Origin, X-Requested-With, Content-Type, Accept, Authorization",
         // "Content-Security-Policy": "upgrade-insecure-requests",
-      }
+      },
     })
       .then(function (response) {
-        return response.text()
+        return response.text();
       })
       .then(function (data) {
-        injectLIMEOutput(document.querySelector("#lime-explanation"), data)
+        document.querySelector("#lime-explanation").style.display = "block";
+        injectLIMEOutput(document.querySelector("#lime-explanation"), data);
 
-        document.querySelector("#button-spinner").style.display = "none"
+        document.querySelector("#button-spinner").style.display = "none";
         document.querySelector("#text-emotion-prediction-btn-label").innerHTML =
-          "Submit"
-        document.querySelector("#text-emotion-prediction-btn").disabled = false
+          "Submit";
+        document.querySelector("#text-emotion-prediction-btn").disabled = false;
+
+        success.value = true;
+        isProcessing.value = false;
+
+        setTimeout(function () {
+          success.value = false;
+        }, 2000);
       })
       .catch((error) => {
-        console.error(error)
+        console.error(error);
 
-        document.querySelector("#button-spinner").style.display = "none"
+        document.querySelector("#button-spinner").style.display = "none";
         document.querySelector("#text-emotion-prediction-btn-label").innerHTML =
-          "Submit"
-        document.querySelector("#text-emotion-prediction-btn").disabled = false
-      })
+          "Submit";
+        document.querySelector("#text-emotion-prediction-btn").disabled = false;
+      });
   }
   console.log(
-    "🚀 ~ file: index.vue:409 ~ fastAPI ~ config.public.apiURL:",
+    "🚀 ~ file: index.vue:412 ~ fastAPI ~ config.public.apiURL:",
     config.public.apiURL
-  )
-}
+  );
+};
 </script>
 
-<style scoped></style>
+<style scoped>
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.1s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+
+/*
+  Enter and leave animations can use different
+  durations and timing functions.
+*/
+.slide-fade-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
+</style>

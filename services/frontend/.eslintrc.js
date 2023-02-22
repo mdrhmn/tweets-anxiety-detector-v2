@@ -1,24 +1,57 @@
+// References:
+// https://stackoverflow.com/questions/69021542/how-to-resolve-parsing-error-this-experimental-syntax-requires-enabling-one-of
+// https://github.com/weicheng2138/nuxt3-eslint-starter
 module.exports = {
   root: true,
   env: {
     node: true,
     browser: true,
     commonjs: true,
-    es2021: true
+    es2021: true,
   },
+
+  rules: {
+    // Set EOL to auto
+    "prettier/prettier": ["error", { endOfLine: "auto" }],
+
+    // Prevent unused vars
+    "vue/no-unused-vars": "error",
+    // "no-unused-expressions": "off",
+
+    // Only allow pascal casing
+    "vue/component-name-in-template-casing": ["error", "PascalCase"],
+
+    // Disable rule
+    "vue/multi-word-component-names": "off",
+
+    // Console and debugger
+    "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
+    "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off",
+
+    // Only allow double quotes
+    quotes: ["error", "double", { allowTemplateLiterals: true }],
+    semi: [2, "always"],
+
+    // No indents
+    indent: "off",
+
+    // Based on the operating system, it will take appropriate line endings.
+    // Reference: https://stackoverflow.com/questions/37826449/expected-linebreaks-to-be-lf-but-found-crlf-linebreak-style
+    "linebreak-style": [
+      "error",
+      process.platform === "win32" ? "windows" : "unix",
+    ],
+
+    // New line at last line
+    "eol-last": "error",
+
+    // No tabs
+    "no-tabs": "error",
+  },
+
   extends: [
-    // "@babel/core",
-    // "@babel/preset-env",
-
-    // Configures ESLint to use some default best-practice rules like getters always need to return a value
+    // eslint:recommended is ESLint"s inbuilt "recommended" config - it turns on a small, sensible set of rules which lint for well-known best-practices.
     "eslint:recommended",
-
-    // Turns on both eslint-plugin-prettier and eslint-config-prettier which tells
-    // ESLint to treat prettier errors as linting errors and disable certain rules
-    // that interfere with prettier (should prevent weird loops).
-    // "prettier",
-    // "plugin:prettier/recommended",
-    // "eslint-config-prettier",
 
     // Settings and rules to enable correct ESLint parsing.
     "plugin:vue/base",
@@ -32,57 +65,31 @@ module.exports = {
     // vue/recommended + plus rules to considerably improve code readability and/or dev experience.
     "plugin:vue/vue3-strongly-recommended",
 
-    // "plugin:nuxt/base",
-    // "plugin:nuxt/recommended",
-    // TypeScript lint
+    // Nuxt
+    "plugin:nuxt/base",
+    "plugin:nuxt/recommended",
+
+    // plugin:@typescript-eslint/recommended is our "recommended" config - it"s similar to eslint:recommended, except it turns on TypeScript-specific rules from our plugin.
     "plugin:@typescript-eslint/recommended",
-    "@nuxtjs/eslint-config-typescript"
+    "@nuxtjs/eslint-config-typescript",
+
+    // Turns on both eslint-plugin-prettier and eslint-config-prettier which tells
+    // ESLint to treat prettier errors as linting errors and disable certain rules
+    // that interfere with prettier (should prevent weird loops).
+    "plugin:prettier/recommended",
+    "prettier",
   ],
-  rules: {
-    // Prevent unused vars
-    "vue/no-unused-vars": "error",
-
-    // Only allow pascal casing
-    "vue/component-name-in-template-casing": ["error", "PascalCase"],
-
-    // Disable rule
-    "vue/multi-word-component-names": "off",
-
-    // Console and debugger
-    "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
-    "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off",
-
-    // Set EOL to auto
-    // "prettier/prettier": ["error", { endOfLine: "auto" }],
-
-    // Only allow double quotes
-    quotes: ["error", "double", { allowTemplateLiterals: true }],
-    semi: "error",
-
-    // Based on the operating system, it will take appropriate line endings.
-    // Reference: https://stackoverflow.com/questions/37826449/expected-linebreaks-to-be-lf-but-found-crlf-linebreak-style
-    "linebreak-style": [
-      "error",
-      process.platform === "win32" ? "windows" : "unix"
-    ],
-
-    // New line at last line
-    "eol-last": "error",
-
-    // No tabs
-    "no-tabs": "error"
-  },
 
   globals: {
-    $nuxt: true
+    $nuxt: true,
   },
 
-  // parser: "@typescript-eslint/parser",
-  // parser: "@babel/eslint-parser",
+  parser: "vue-eslint-parser",
   parserOptions: {
-    ecmaVersion: 12,
-    parser: "@babel/eslint-parser",
+    ecmaVersion: "latest",
+    parser: "@typescript-eslint/parser",
     requireConfigFile: false,
-    sourceType: "module"
-  }
-}
+    // Allows for the use of imports
+    sourceType: "module",
+  },
+};

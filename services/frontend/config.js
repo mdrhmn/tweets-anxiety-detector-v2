@@ -14,6 +14,6 @@ export default {
     // facebook: 'Muhd Rahiman',
     twitter: "MuhdRahiman_",
     instagram: "rayperture",
-    codestats: "mdrhmn" // https://codestats.net make a profile if you dont already have one.
-  }
-}
+    codestats: "mdrhmn", // https://codestats.net make a profile if you dont already have one.
+  },
+};
