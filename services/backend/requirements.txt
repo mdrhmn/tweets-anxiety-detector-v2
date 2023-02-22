@@ -4,9 +4,11 @@ black
 contractions
 emoji
 fastapi
+# htmlmin
 inflect
 lime
-mangum
+# mangum
+minify_html
 nltk
 tqdm
 Unidecode
