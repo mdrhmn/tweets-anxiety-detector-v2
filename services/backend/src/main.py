@@ -16,7 +16,7 @@ import pickle
 
 # HTML Minifier
 import minify_html
-import htmlmin
+# import htmlmin
 
 # LIME
 from lime import lime_text
