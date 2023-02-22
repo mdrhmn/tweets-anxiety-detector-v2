@@ -287,7 +287,7 @@
               <span
                 class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-purple-900 dark:text-purple-300"
                 >Worry</span
-              ><br /><br />. The emotion detected is/should considered as
+              >.<br /><br />The emotion detected is/should considered as
               <span
                 class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300"
                 >No Emotion</span
