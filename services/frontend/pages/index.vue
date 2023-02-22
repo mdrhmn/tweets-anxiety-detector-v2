@@ -392,15 +392,28 @@ const fastAPI = (e) => {
                     document.querySelector("#lime-explanation"),
                     data
                 );
+
+                document.querySelector("#button-spinner").style.display =
+                    "none";
+                document.querySelector(
+                    "#text-emotion-prediction-btn-label"
+                ).innerHTML = "Submit";
+                document.querySelector(
+                    "#text-emotion-prediction-btn"
+                ).disabled = false;
             })
             .catch((error) => {
                 console.error(error);
-            });
 
-        document.querySelector("#button-spinner").style.display = "none";
-        document.querySelector("#text-emotion-prediction-btn-label").innerHTML =
-            "Submit";
-        document.querySelector("#text-emotion-prediction-btn").disabled = false;
+                document.querySelector("#button-spinner").style.display =
+                    "none";
+                document.querySelector(
+                    "#text-emotion-prediction-btn-label"
+                ).innerHTML = "Submit";
+                document.querySelector(
+                    "#text-emotion-prediction-btn"
+                ).disabled = false;
+            });
     }
     console.log(
         "🚀 ~ file: index.vue:409 ~ fastAPI ~ config.public.apiURL:",
