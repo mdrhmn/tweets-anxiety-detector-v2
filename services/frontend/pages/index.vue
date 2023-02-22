@@ -1,10 +1,4 @@
 <template>
-    <!-- <Head>
-        <Meta
-            http-equiv="Content-Security-Policy"
-            content="upgrade-insecure-requests"
-        />
-    </Head> -->
     <div
         class="bg-color dark:bg-gray-400 flex items-center h-auto justify-center"
     >
@@ -141,6 +135,21 @@
                                     id="text-emotion-prediction-textarea"
                                     class="resize-none block w-full h-40 px-4 py-2 text-gray-600 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-indigo-400 dark:focus:border-indigo-300 focus:outline-none focus:ring focus:ring-indigo-300 focus:ring-opacity-40"
                                 ></textarea>
+                                <span
+                                    v-if="prompt.length == 0"
+                                    class="text-gray-500 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:text-white"
+                                    >{{ prompt.length }} / 280 characters</span
+                                >
+                                <span
+                                    v-else-if="prompt.length < 280"
+                                    class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300"
+                                    >{{ prompt.length }} / 280 characters</span
+                                >
+                                <span
+                                    v-else
+                                    class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300"
+                                    >{{ prompt.length }} / 280 characters</span
+                                >
                             </div>
 
                             <div class="flex justify-center mt-6">
@@ -331,6 +340,8 @@ const error = ref("");
 const LIMEOutput = ref("");
 
 const config = useRuntimeConfig();
+
+const checkPromptChars = computed(() => {});
 
 // Executing <script> elements inserted with .innerHTML
 // Reference: https://stackoverflow.com/questions/2592092/executing-script-elements-inserted-with-innerhtml
