@@ -10,9 +10,9 @@ module.exports = {
     "./node_modules/flowbite.{js,ts}"
   ],
   theme: {
-    extend: {},
+    extend: {}
   },
   plugins: [
-    require('flowbite')
-  ],
+    require("flowbite")
+  ]
 }
