@@ -24,7 +24,7 @@
             <div
                 v-if="error"
                 id="targetElement"
-                class="absolute top-5 right-5 flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800"
+                class="fixed top-10 right-5 flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800"
                 role="alert"
             >
                 <div
@@ -76,7 +76,7 @@
             <div class="border-t border-gray-200 dark:border-none">
                 <section class="dark:bg-gray-800">
                     <div class="container px-6 py-12 mx-auto">
-                        <div class="max-w-lg mx-auto">
+                        <div class="lg:max-w-xl mx-auto">
                             <h1
                                 class="text-3xl font-bold text-gray-800 dark:text-white md:text-4xl text-center"
                             >
@@ -212,7 +212,7 @@
                     </p>
 
                     <div
-                        class="flex max-w-lg p-4 my-5 mb-4 text-sm text-indigo-700 bg-indigo-100 rounded-lg dark:text-white dark:bg-indigo-600"
+                        class="flex w-full lg:max-w-xl p-4 my-5 mb-4 text-sm text-indigo-700 bg-indigo-100 rounded-lg dark:text-white dark:bg-indigo-600"
                         role="alert"
                     >
                         <svg
@@ -231,15 +231,16 @@
                             The emotion prediction will be analysed into 2
                             emotions - <span class="font-medium">Happy</span> or
                             <span class="font-medium">Worry</span
-                            >.<br /><br />The emotion detected is considered as
+                            >.<br /><br />The emotion detected is/should
+                            considered as
                             <span class="font-medium">No Emotion</span> if the
                             probabilities of Happy and Worry emotions are
-                            contentious.
+                            contentious (within 0.2% difference).
                         </div>
                     </div>
                     <div
                         id="lime-explanation"
-                        class="max-w-lg p-4 my-5 text-sm dark:text-white rounded-md flex py-3 mb-10 w-full items-center justify-center"
+                        class="lg:max-w-xl p-4 my-5 text-sm dark:text-white rounded-md flex py-3 mb-10 w-full items-center justify-center overflow-x-scroll"
                     ></div>
                 </div>
 
@@ -316,9 +317,8 @@
                 class="flex items-center justify-center py-4 text-center bg-gray-50 border-gray-200 dark:border-none dark:bg-gray-700"
             >
                 <span class="text-sm text-gray-600 dark:text-gray-200"
-                    >{{ new Date().getFullYear() }} © Fitweet — Muhd Rahiman,
-                    Faidz Hazirah.<br />Made using Tailwind, Nuxt 3, FastAPI &
-                    Flowbite.</span
+                    >{{ new Date().getFullYear() }} © Fitweet — Muhd Rahiman.<br />Made
+                    using Tailwind, Nuxt 3, FastAPI & Flowbite.</span
                 >
             </div>
         </div>
@@ -366,6 +366,7 @@ const fastAPI = (e) => {
         document.querySelector("#text-emotion-prediction-btn-label").innerHTML =
             "Processing";
         document.querySelector("#button-spinner").style.display = "inline";
+        document.querySelector("#text-emotion-prediction-btn").disabled = true;
 
         fetch(config.public.apiURL, {
             // credentials: "include",
@@ -391,21 +392,20 @@ const fastAPI = (e) => {
                     document.querySelector("#lime-explanation"),
                     data
                 );
-                document.querySelector("#button-spinner").style.display =
-                    "none";
-                document.querySelector(
-                    "#text-emotion-prediction-btn-label"
-                ).innerHTML = "Submit";
             })
             .catch((error) => {
-                document.querySelector("#button-spinner").style.display =
-                    "none";
-                document.querySelector(
-                    "#text-emotion-prediction-btn-label"
-                ).innerHTML = "Submit";
                 console.error(error);
             });
+
+        document.querySelector("#button-spinner").style.display = "none";
+        document.querySelector("#text-emotion-prediction-btn-label").innerHTML =
+            "Submit";
+        document.querySelector("#text-emotion-prediction-btn").disabled = false;
     }
+    console.log(
+        "🚀 ~ file: index.vue:409 ~ fastAPI ~ config.public.apiURL:",
+        config.public.apiURL
+    );
 };
 </script>
 
