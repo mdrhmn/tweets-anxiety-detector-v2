@@ -5,8 +5,7 @@ export default defineNuxtConfig({
     runtimeConfig: {
         public: {
             apiURL:
-                process.env.API_URL ||
-                "http://tweets-anxiety-predictor.herokuapp.com/predict-lime/",
+                process.env.API_URL || "http://127.0.0.1:8000/predict-lime/",
         },
     },
 
