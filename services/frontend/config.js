@@ -4,8 +4,8 @@ export default {
 	name: 'itsmeray',
 	firstName: 'Muhammad Rahiman',
 	fullName: 'Muhammad Rahiman Abdulmanab',
-	domain: 'tweets-anxiety-predictor.herokuapp.com', // add without https://, used in meta tags and share urls
-	url: 'https://tweets-anxiety-predictor.herokuapp.com/', // add without https://, used in meta tags and share urls
+	domain: 'tweets-anxiety-predictor.vercel.app', // add without https://, used in meta tags and share urls
+	url: 'https://tweets-anxiety-predictor.vercel.app', // add without https://, used in meta tags and share urls
 	email: 'mdrhmn99@gmail.com',
 
 	social: {
