@@ -14,6 +14,10 @@ from src.data_cleaning import cleaning_pipeline
 # Model export
 import pickle
 
+# HTML Minifier
+import minify_html
+import htmlmin
+
 # LIME
 from lime import lime_text
 
@@ -149,12 +153,20 @@ async def get_text_emotion_prediction(tweet: Tweet):
     explained = explainer.explain_instance(
         text_instance=tweet.text,
         classifier_fn=utils_text_emotion_prediction,
-        num_features=10,
         distance_metric="cosine",
     )
 
     explained_output = explained.as_html()
-    return HTMLResponse(content=explained_output, status_code=201)
+    # print(explained.as_map())
+    print(explained.as_list())
+    # explained_output = explained.as_pyplot_figure()
+    # explained_output.savefig("test.png")
+
+    # minified = htmlmin.minify(explained_output, remove_empty_space=True)
+    minified = minify_html.minify(
+        explained_output, minify_js=True)
+
+    return HTMLResponse(content=minified, status_code=201)
 
 
 @ app.get("/")
