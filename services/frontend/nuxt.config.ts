@@ -77,7 +77,7 @@ export default defineNuxtConfig({
                 {
                     hid: "og:image",
                     property: "og:image",
-                    content: `https://${config.domain}/`,
+                    content: `https://${config.domain}/sentiment-analysis-of-twitter.png`,
                 },
                 // {
                 // 	hid: "twitter:card",
@@ -87,7 +87,7 @@ export default defineNuxtConfig({
                 {
                     hid: "twitter:image",
                     property: "twitter:image",
-                    content: `https://${config.domain}/`,
+                    content: `https://${config.domain}/sentiment-analysis-of-twitter.png`,
                 },
                 {
                     hid: "twitter:card",
