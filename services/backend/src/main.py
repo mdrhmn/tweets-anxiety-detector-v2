@@ -5,7 +5,6 @@ from fastapi.middleware.cors import CORSMiddleware  # NEW
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
 from fastapi.exceptions import RequestValidationError
 from fastapi.encoders import jsonable_encoder
-from starlette.datastructures import MutableHeaders
 # from starlette.middleware import Middleware
 # from starlette.middleware.cors import CORSMiddleware
 
@@ -22,6 +21,7 @@ from lime import lime_text
 
 # Ignore warnings
 import warnings
+warnings.filterwarnings("ignore")
 
 
 ALLOWED_ORIGINS = [
@@ -32,32 +32,9 @@ ALLOWED_ORIGINS = [
     "http://tweets-anxiety-predictor.vercel.app",
 ]
 
-warnings.filterwarnings("ignore")
 
-# middleware = [
-#     Middleware(CORSMiddleware, allow_origins=ALLOWED_ORIGINS)
-# ]
-# app = FastAPI(middleware=middleware)
 app = FastAPI()
 # handler = Mangum(app)
-
-# # handle CORS preflight requests
-# @app.options('/{rest_of_path:path}')
-# async def preflight_handler(request: Request, rest_of_path: str) -> Response:
-#     response = Response()
-#     response.headers['Access-Control-Allow-Origin'] = "*"
-#     response.headers['Access-Control-Allow-Methods'] = 'POST, GET, DELETE, OPTIONS'
-#     response.headers['Access-Control-Allow-Headers'] = 'Authorization, Content-Type'
-#     return response
-
-# # set CORS headers
-# @app.middleware("http")
-# async def add_CORS_header(request: Request, call_next):
-#     response = await call_next(request)
-#     response.headers['Access-Control-Allow-Origin'] = "*"
-#     response.headers['Access-Control-Allow-Methods'] = 'POST, GET, DELETE, OPTIONS'
-#     response.headers['Access-Control-Allow-Headers'] = 'Authorization, Content-Type'
-#     return response
 
 app.add_middleware(
     CORSMiddleware,
@@ -81,14 +58,6 @@ class TweetPrediction(BaseModel):
 
 class LIMEPrediction(BaseModel):
     output: str
-
-
-@app.exception_handler(RequestValidationError)
-async def validation_exception_handler(request: Request, exc: RequestValidationError):
-    return JSONResponse(
-        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-        content=jsonable_encoder({"detail": exc.errors(), "body": exc.body}),
-    )
 
 
 def utils_text_emotion_prediction(text):
@@ -171,29 +140,11 @@ def utils_tweets_predict(text, model_path, vect_path):
             return "Worry", predict_proba, cleaned_tweet
 
 
-# @app.exception_handler(RequestValidationError)
 @app.post(
     "/predict-lime/",
-    # status_code=200,
-    # response_class=FileResponse
-    # response_class=HTMLResponse
+    response_class=HTMLResponse
 )
-# @app.options(
-#     "/predict-lime/",
-#     status_code=201,
-#     # response_class=FileResponse
-#     # response_class=HTMLResponse
-# )
-def get_text_emotion_prediction(tweet: Tweet, request: Request):
-    # if (request.method == "OPTIONS"):
-    #     new_header = MutableHeaders(request._headers)
-    #     new_header["Access-Control-Allow-Origin"] = "*"
-    #     new_header["Access-Control-Allow-Methods"] = "POST, GET, DELETE, OPTIONS"
-    #     return
-
-    # print(request.method)
-    # print(request.client)
-    print(request.headers)
+async def get_text_emotion_prediction(tweet: Tweet):
     explainer = lime_text.LimeTextExplainer(class_names=["Happy", "Worry"])
     explained = explainer.explain_instance(
         text_instance=tweet.text,
