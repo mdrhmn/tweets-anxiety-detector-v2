@@ -312,7 +312,7 @@
 
                 <div
                   v-if="isProcessing"
-                  class="lg:max-w-xl p-4 my-5 text-sm dark:text-white rounded-md relative py-3 mb-10 w-full items-center justify-center bg-white border border-gray-100 shadow-sm dark:bg-gray-500 dark:border-gray-800 dark:hover:bg-gray-400"
+                  class="lg:max-w-xl p-4 my-5 text-sm dark:text-white rounded-md relative py-3 mb-10 w-full items-center justify-center bg-white border border-gray-200 shadow-sm dark:bg-gray-500 dark:border-gray-800 dark:hover:bg-gray-400"
                 >
                   <h5
                     class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white opacity-20"
@@ -351,7 +351,7 @@
 
                 <div
                   id="lime-explanation"
-                  class="block lg:max-w-xl p-4 my-5 text-sm dark:text-white rounded-md py-3 mb-10 w-full items-center justify-center overflow-x-scroll"
+                  class="block lg:max-w-xl p-4 my-5 text-sm dark:text-white rounded-md py-3 mb-10 w-full items-center justify-center overflow-x-scrol border border-gray-200 dark:border-gray-800"
                 />
               </div>
             </div>
