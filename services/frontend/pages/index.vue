@@ -532,6 +532,8 @@ const fastAPI = (e) => {
         success.value = true;
         isProcessing.value = false;
 
+        document.querySelector("#lime-explanation").scrollIntoView();
+
         setTimeout(function () {
           success.value = false;
         }, 2000);
