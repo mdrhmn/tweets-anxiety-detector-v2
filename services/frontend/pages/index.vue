@@ -229,7 +229,7 @@
 
         <hr class="border-gray-200 dark:border-gray-700" />
 
-        <section id="#result-section" class="dark:bg-gray-800">
+        <section id="result-section" class="dark:bg-gray-800">
           <div class="container px-6 py-12 mx-auto">
             <div class="lg:max-w-xl mx-auto">
               <div class="flex flex-col items-center space-y-3">
