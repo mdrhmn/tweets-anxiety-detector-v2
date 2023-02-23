@@ -124,7 +124,7 @@
               <h1
                 class="text-3xl font-bold text-gray-800 dark:text-white md:text-4xl text-center"
               >
-                Feeling anxious? Detect the anxiety<br />from your Tweets!
+                Feeling anxious?<br />Detect the anxiety<br />from your Tweets!
               </h1>
 
               <p class="mt-6 text-gray-500 dark:text-gray-300 text-center">
