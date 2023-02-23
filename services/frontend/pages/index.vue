@@ -9,7 +9,7 @@
     >
       <div class="px-4 py-5 sm:px-6 bg-gray-50 dark:bg-gray-700">
         <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-white">
-          Tweets Anxiety Predictor
+          Tweets Anxiety Detector
         </h3>
       </div>
 
@@ -124,7 +124,7 @@
               <h1
                 class="text-3xl font-bold text-gray-800 dark:text-white md:text-4xl text-center"
               >
-                Predict the anxiety<br />of your Tweet!
+                Feeling anxious? Detect the anxiety<br />from your Tweets!
               </h1>
 
               <p class="mt-6 text-gray-500 dark:text-gray-300 text-center">
@@ -143,7 +143,7 @@
                 class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700"
               >
                 Hyperparameter-tuned Logistic Regression trained with 4,700
-                Tweets.
+                bilingual English & Malay Tweets.
                 <div class="tooltip-arrow" data-popper-arrow />
               </div>
 
@@ -167,13 +167,13 @@
                   <!-- <span class="font-medium">Info alert!</span> -->
                   <!-- <br> -->
                   Please note that the longer the text length, the longer the
-                  prediction time.
+                  analysis time.
                 </div>
               </div>
 
               <div class="w-full mt-6">
                 <textarea
-                  id="text-emotion-prediction-textarea"
+                  id="text-emotion-detection-textarea"
                   v-model="prompt"
                   maxlength="280"
                   required
@@ -199,7 +199,7 @@
 
               <div class="flex justify-center mt-6">
                 <button
-                  id="text-emotion-prediction-btn"
+                  id="text-emotion-detection-btn"
                   class="px-4 py-2 tracking-wide text-white capitalize transition-colors duration-200 transform bg-blue-600 rounded-md focus:ring focus:ring-blue-300 focus:ring-opacity-80 fo sm:mx-2 hover:bg-blue-500 focus:outline-none focus:bg-blue-500"
                   @click="fastAPI"
                 >
@@ -220,7 +220,7 @@
                       fill="currentColor"
                     />
                   </svg>
-                  <span id="text-emotion-prediction-btn-label">Submit</span>
+                  <span id="text-emotion-detection-btn-label">Submit</span>
                 </button>
               </div>
             </div>
@@ -258,7 +258,7 @@
                   Result
                 </h1>
                 <p class="mt-6 text-gray-500 dark:text-gray-300 text-center">
-                  The prediction result and analysis will be displayed here.
+                  The detection result and analysis will be displayed here.
                 </p>
 
                 <div
@@ -279,7 +279,7 @@
                   </svg>
 
                   <div>
-                    The emotion prediction will be analysed into 2 emotions:
+                    The emotion detection will be analysed into 2 emotions:
                     <span
                       class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300"
                       >Happy</span
@@ -405,7 +405,7 @@
                 <p class="text-gray-500 dark:text-gray-300">
                   LIME is a technique that approximates any black box machine
                   learning model with a local, interpretable model to explain
-                  each individual prediction.
+                  each individual detection.
                 </p>
 
                 <a
@@ -496,10 +496,10 @@ const fastAPI = (e) => {
     isProcessing.value = true;
     document.querySelector("#lime-explanation").style.display = "none";
 
-    document.querySelector("#text-emotion-prediction-btn-label").innerHTML =
+    document.querySelector("#text-emotion-detection-btn-label").innerHTML =
       "Processing";
     document.querySelector("#button-spinner").style.display = "inline";
-    document.querySelector("#text-emotion-prediction-btn").disabled = true;
+    document.querySelector("#text-emotion-detection-btn").disabled = true;
 
     fetch(config.public.apiURL, {
       // credentials: "include",
@@ -525,9 +525,9 @@ const fastAPI = (e) => {
         injectLIMEOutput(document.querySelector("#lime-explanation"), data);
 
         document.querySelector("#button-spinner").style.display = "none";
-        document.querySelector("#text-emotion-prediction-btn-label").innerHTML =
+        document.querySelector("#text-emotion-detection-btn-label").innerHTML =
           "Submit";
-        document.querySelector("#text-emotion-prediction-btn").disabled = false;
+        document.querySelector("#text-emotion-detection-btn").disabled = false;
 
         success.value = true;
         isProcessing.value = false;
@@ -540,9 +540,9 @@ const fastAPI = (e) => {
         console.error(e);
 
         document.querySelector("#button-spinner").style.display = "none";
-        document.querySelector("#text-emotion-prediction-btn-label").innerHTML =
+        document.querySelector("#text-emotion-detection-btn-label").innerHTML =
           "Submit";
-        document.querySelector("#text-emotion-prediction-btn").disabled = false;
+        document.querySelector("#text-emotion-detection-btn").disabled = false;
         isProcessing.value = false;
 
         if (e.response) {
