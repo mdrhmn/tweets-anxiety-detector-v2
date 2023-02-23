@@ -76,12 +76,12 @@ export default defineNuxtConfig({
         {
           hid: "og:image",
           property: "og:image",
-          content: `https://${config.domain}/sentiment-analysis-of-twitter.png`,
+          content: `https://${config.domain}/img/sentiment-analysis-of-twitter.png`,
         },
         {
           hid: "twitter:image",
           property: "twitter:image",
-          content: `https://${config.domain}/sentiment-analysis-of-twitter.png`,
+          content: `https://${config.domain}/img/sentiment-analysis-of-twitter.png`,
         },
         {
           hid: "twitter:card",
@@ -115,7 +115,13 @@ export default defineNuxtConfig({
             "A single-page application (SPA) developed using Nuxt 3 and FastAPI for predicting the anxiety probability of a given tweet (or any text prompt limited to max. 280 characters).",
         },
       ],
-      link: [],
+      link: [
+        {
+          rel: "apple-touch-icon",
+          type: "image/png",
+          href: `https://${config.domain}/img/apple-touch-icon.png`, // If Icon is inside @/assets/ folder or available at '/...'
+        },
+      ],
       style: [],
       script: [],
       noscript: [],
