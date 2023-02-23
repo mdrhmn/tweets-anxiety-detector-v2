@@ -30,10 +30,10 @@ warnings.filterwarnings("ignore")
 
 ALLOWED_ORIGINS = [
     "http://localhost:3000", "http://127.0.0.1:3000",
-    # "https://tweets-anxiety-predictor.vercel.app/",
-    # "http://tweets-anxiety-predictor.vercel.app/",
-    "https://tweets-anxiety-predictor.vercel.app",
-    "http://tweets-anxiety-predictor.vercel.app",
+    # "https://tweets-anxiety-detector.vercel.app/",
+    # "http://tweets-anxiety-detector.vercel.app/",
+    "https://tweets-anxiety-detector.vercel.app",
+    "http://tweets-anxiety-detector.vercel.app",
 ]
 
 
