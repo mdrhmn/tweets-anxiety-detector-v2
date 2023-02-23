@@ -536,13 +536,22 @@ const fastAPI = (e) => {
           success.value = false;
         }, 2000);
       })
-      .catch((error) => {
-        console.error(error);
+      .catch((e) => {
+        console.error(e);
 
         document.querySelector("#button-spinner").style.display = "none";
         document.querySelector("#text-emotion-prediction-btn-label").innerHTML =
           "Submit";
         document.querySelector("#text-emotion-prediction-btn").disabled = false;
+        isProcessing.value = false;
+
+        if (e.response) {
+          error.value = `Error ${e.response.status}`;
+
+          setTimeout(function () {
+            error.value = "";
+          }, 2000);
+        }
       });
   }
   console.log(
