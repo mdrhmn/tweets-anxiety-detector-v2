@@ -351,7 +351,7 @@
 
                 <div
                   id="lime-explanation"
-                  class="block lg:max-w-xl p-4 my-5 text-sm dark:text-white rounded-md py-3 mb-10 w-full items-center justify-center overflow-x-scrol border border-gray-200 dark:border-gray-800"
+                  class="hidden lg:max-w-xl p-4 my-5 text-sm dark:text-white rounded-md py-3 mb-10 w-full items-center justify-center overflow-x-scrol border border-gray-200 dark:border-gray-800"
                 />
               </div>
             </div>
@@ -494,8 +494,8 @@ const fastAPI = (e) => {
   } else {
     error.value = false;
     isProcessing.value = true;
-    document.querySelector("#lime-explanation").style.display = "none";
 
+    document.querySelector("#lime-explanation").style.display = "none";
     document.querySelector("#text-emotion-detection-btn-label").innerHTML =
       "Processing";
     document.querySelector("#button-spinner").style.display = "inline";
