@@ -287,19 +287,21 @@
               <span
                 class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-purple-900 dark:text-purple-300"
                 >Worry</span
-              >.<br /><br />The emotion detected is/should considered as
+              ><br /><br />The emotion detected is/should considered as
               <span
                 class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300"
                 >No Emotion</span
               >
               if the probabilities of Happy and Worry emotions are
-              contentious/with marginal (~2%) difference.
+              <span class="font-medium"
+                >contentious/with marginal (~2%) difference</span
+              >.
             </div>
           </div>
 
           <div
             v-if="isProcessing"
-            class="lg:max-w-xl p-4 my-5 text-sm dark:text-white rounded-md relative py-3 mb-10 w-full items-center justify-center bg-white border border-gray-100 shadow-md dark:bg-gray-500 dark:border-gray-800 dark:hover:bg-gray-400"
+            class="lg:max-w-xl p-4 my-5 text-sm dark:text-white rounded-md relative py-3 mb-10 w-full items-center justify-center bg-white border border-gray-100 shadow dark:bg-gray-500 dark:border-gray-800 dark:hover:bg-gray-400"
           >
             <h5
               class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white opacity-20"
