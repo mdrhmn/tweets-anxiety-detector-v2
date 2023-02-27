@@ -1,4 +1,4 @@
-# Tweets Anxiety Predictor
+# Tweets Anxiety Detector
 
 This is a single-page application (SPA) developed using **Nuxt 3.2.2** and **FastAPI 0.92.0** for **predicting the anxiety probability of a given tweet** (or any text prompt limited to max. 280 characters).
 

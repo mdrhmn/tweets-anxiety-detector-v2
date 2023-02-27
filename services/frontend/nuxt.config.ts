@@ -24,7 +24,7 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      title: `Tweets Anxiety Predictor`,
+      title: `Tweets Anxiety Detector`,
       htmlAttrs: {
         lang: "en",
       },
@@ -45,7 +45,7 @@ export default defineNuxtConfig({
         {
           hid: "title",
           name: "title",
-          content: `Tweets Anxiety Predictor`,
+          content: `Tweets Anxiety Detector`,
         },
         {
           // hid: 'author',
@@ -65,7 +65,7 @@ export default defineNuxtConfig({
         {
           hid: "og:title",
           property: "og:title",
-          content: `Tweets Anxiety Predictor`,
+          content: `Tweets Anxiety Detector`,
         },
         {
           hid: "og:description",
@@ -106,7 +106,7 @@ export default defineNuxtConfig({
         {
           hid: "twitter:title",
           property: "twitter:title",
-          content: "Tweets Anxiety Predictor",
+          content: "Tweets Anxiety Detector",
         },
         {
           hid: "twitter:description",
